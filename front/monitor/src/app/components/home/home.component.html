@@ -1,0 +1,49 @@
+<div class="container">
+    <nav class="nav nav-tabs">
+        <!-- <a class="nav-item nav-link active" href="#">Active</a> -->
+        <a class="nav-item nav-link" href="#">Gas</a>
+        <a class="nav-item nav-link" href="#">Electricity</a>
+        <a class="nav-item nav-link" href="#">Water</a>
+      </nav>
+</div>
+
+
+<div class="container">
+    <button (click)="toggleId()" class="btn btn-primary my-sm-3">
+      {{!showId ? "Hide id" : "Show Id"}} 
+    </button>
+  </div>
+
+  <table class="table container">
+    <thead>
+      <tr>          
+        <th scope="col">No.</th>
+        <th *ngIf="!showId" scope="col">Id</th>
+        <th scope="col">Date</th>
+        <th scope="col">Type</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>      
+        <tr *ngFor="let record of records; let idx = index">
+          <!-- <td>{{idx}}</td> -->
+          <td *ngIf="!showId">{{record.id}}</td>
+          <td style="width:20px">
+                <a [routerLink]="['/records/'+ record.id]" ><span class="detailIcon">
+                    <i class="fas fa-info-circle"></i>
+                </span></a>
+            </td>
+          <td>{{record.date | date:'dd/MM/yyyy'}}</td>
+          <td>{{record.type}}</td>
+          <td>{{record.value}} units</td>
+       </tr>
+      
+    </tbody>
+  </table>
+
+
+  <div class="container row">
+    <div class="col-sm">
+        <app-new-record (record)=createRecord($event)></app-new-record>
+    </div>
+  </div>

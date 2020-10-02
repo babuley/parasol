@@ -1,0 +1,60 @@
+{
+  "records": [
+    {
+      "id": 1,
+      "date": "2019-12-01T07:00:00.000Z",
+      "type": "gas",
+      "value": 6213
+    },
+    {
+      "id": 2,
+      "date": "2020-12-01T07:00:00.000Z",
+      "type": "electricity",
+      "value": 5454
+    },
+    {
+      "id": 3,
+      "date": "2019-12-01T07:00:00.000Z",
+      "type": "gas",
+      "value": 5454
+    },
+    {
+      "id": 4,
+      "date": "2018-12-01T07:00:00.000Z",
+      "type": "electricity",
+      "value": 544
+    },
+    {
+      "id": 5,
+      "date": "2019-12-01T07:00:00.000Z",
+      "type": "water",
+      "value": 124
+    },
+    {
+      "id": 6,
+      "date": "2020-12-01T07:00:00.000Z",
+      "type": "electricity",
+      "value": 554
+    },
+    {
+      "value": "443",
+      "date": null,
+      "id": 7
+    },
+    {
+      "value": "33",
+      "date": null,
+      "id": 8
+    },
+    {
+      "value": "44",
+      "date": "1978-11-01T00:00:00.000Z",
+      "id": 9
+    },
+    {
+      "date": null,
+      "value": "55",
+      "id": 10
+    }
+  ]
+}
