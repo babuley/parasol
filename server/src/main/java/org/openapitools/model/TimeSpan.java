@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
  * Represents a span of time, implicitly covering a maximum of 24hrs
  */
 @ApiModel(description = "Represents a span of time, implicitly covering a maximum of 24hrs")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-02T16:50:59.160267+01:00[Europe/London]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-02T17:20:43.453855+01:00[Europe/London]")
 
 public class TimeSpan   {
   @JsonProperty("from")

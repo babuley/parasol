@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
- * Type of the record to create,  *   gasvoice *   electricity  *   water   
+ * Type of the record to create,  *   gas *   electricity  *   water   
  */
 public enum ReadingType {
   

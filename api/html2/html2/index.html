@@ -950,24 +950,28 @@ ul.nav-tabs {
 };
     defs["ReadingType"] = {
   "type" : "string",
-  "description" : "Type of the record to create, \n*   gasvoice\n*   electricity \n*   water \n\n",
+  "description" : "Type of the record to create, \n*   gas\n*   electricity \n*   water \n\n",
   "enum" : [ "gas", "electricity", "water" ]
 };
     defs["Record"] = {
-  "required" : [ "messageId", "messageText", "patientId" ],
+  "required" : [ "customerId", "id", "value", "when" ],
   "type" : "object",
   "properties" : {
-    "messageId" : {
+    "id" : {
       "type" : "string"
     },
-    "patientId" : {
+    "customerId" : {
       "type" : "string"
     },
-    "messageText" : {
+    "when" : {
+      "type" : "string",
+      "format" : "date"
+    },
+    "value" : {
       "type" : "string",
       "description" : "Text of the message to be registered"
     },
-    "messageType" : {
+    "readingType" : {
       "type" : "string",
       "description" : "Optional messageType for this message"
     }

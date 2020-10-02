@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.LocalDate;
 import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -12,102 +13,128 @@ import javax.validation.constraints.*;
 /**
  * Record
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-02T16:50:59.160267+01:00[Europe/London]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-02T17:20:43.453855+01:00[Europe/London]")
 
 public class Record   {
-  @JsonProperty("messageId")
-  private String messageId;
+  @JsonProperty("id")
+  private String id;
 
-  @JsonProperty("patientId")
-  private String patientId;
+  @JsonProperty("customerId")
+  private String customerId;
 
-  @JsonProperty("messageText")
-  private String messageText;
+  @JsonProperty("when")
+  @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE)
+  private LocalDate when;
 
-  @JsonProperty("messageType")
-  private String messageType;
+  @JsonProperty("value")
+  private String value;
 
-  public Record messageId(String messageId) {
-    this.messageId = messageId;
+  @JsonProperty("readingType")
+  private String readingType;
+
+  public Record id(String id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get messageId
-   * @return messageId
+   * Get id
+   * @return id
   */
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
 
-  public String getMessageId() {
-    return messageId;
+  public String getId() {
+    return id;
   }
 
-  public void setMessageId(String messageId) {
-    this.messageId = messageId;
+  public void setId(String id) {
+    this.id = id;
   }
 
-  public Record patientId(String patientId) {
-    this.patientId = patientId;
+  public Record customerId(String customerId) {
+    this.customerId = customerId;
     return this;
   }
 
   /**
-   * Get patientId
-   * @return patientId
+   * Get customerId
+   * @return customerId
   */
   @ApiModelProperty(required = true, value = "")
   @NotNull
 
 
-  public String getPatientId() {
-    return patientId;
+  public String getCustomerId() {
+    return customerId;
   }
 
-  public void setPatientId(String patientId) {
-    this.patientId = patientId;
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
   }
 
-  public Record messageText(String messageText) {
-    this.messageText = messageText;
+  public Record when(LocalDate when) {
+    this.when = when;
+    return this;
+  }
+
+  /**
+   * Get when
+   * @return when
+  */
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+  @Valid
+
+  public LocalDate getWhen() {
+    return when;
+  }
+
+  public void setWhen(LocalDate when) {
+    this.when = when;
+  }
+
+  public Record value(String value) {
+    this.value = value;
     return this;
   }
 
   /**
    * Text of the message to be registered
-   * @return messageText
+   * @return value
   */
   @ApiModelProperty(required = true, value = "Text of the message to be registered")
   @NotNull
 
 
-  public String getMessageText() {
-    return messageText;
+  public String getValue() {
+    return value;
   }
 
-  public void setMessageText(String messageText) {
-    this.messageText = messageText;
+  public void setValue(String value) {
+    this.value = value;
   }
 
-  public Record messageType(String messageType) {
-    this.messageType = messageType;
+  public Record readingType(String readingType) {
+    this.readingType = readingType;
     return this;
   }
 
   /**
    * Optional messageType for this message
-   * @return messageType
+   * @return readingType
   */
   @ApiModelProperty(value = "Optional messageType for this message")
 
 
-  public String getMessageType() {
-    return messageType;
+  public String getReadingType() {
+    return readingType;
   }
 
-  public void setMessageType(String messageType) {
-    this.messageType = messageType;
+  public void setReadingType(String readingType) {
+    this.readingType = readingType;
   }
 
 
@@ -120,15 +147,16 @@ public class Record   {
       return false;
     }
     Record record = (Record) o;
-    return Objects.equals(this.messageId, record.messageId) &&
-        Objects.equals(this.patientId, record.patientId) &&
-        Objects.equals(this.messageText, record.messageText) &&
-        Objects.equals(this.messageType, record.messageType);
+    return Objects.equals(this.id, record.id) &&
+        Objects.equals(this.customerId, record.customerId) &&
+        Objects.equals(this.when, record.when) &&
+        Objects.equals(this.value, record.value) &&
+        Objects.equals(this.readingType, record.readingType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(messageId, patientId, messageText, messageType);
+    return Objects.hash(id, customerId, when, value, readingType);
   }
 
   @Override
@@ -136,10 +164,11 @@ public class Record   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Record {\n");
     
-    sb.append("    messageId: ").append(toIndentedString(messageId)).append("\n");
-    sb.append("    patientId: ").append(toIndentedString(patientId)).append("\n");
-    sb.append("    messageText: ").append(toIndentedString(messageText)).append("\n");
-    sb.append("    messageType: ").append(toIndentedString(messageType)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
+    sb.append("    when: ").append(toIndentedString(when)).append("\n");
+    sb.append("    value: ").append(toIndentedString(value)).append("\n");
+    sb.append("    readingType: ").append(toIndentedString(readingType)).append("\n");
     sb.append("}");
     return sb.toString();
   }
