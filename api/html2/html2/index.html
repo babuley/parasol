@@ -841,6 +841,18 @@ ul.nav-tabs {
   <script>
     // Script section to load models into a JS Var
     var defs = {}
+    defs["Account"] = {
+  "required" : [ "id", "name" ],
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "string"
+    },
+    "name" : {
+      "type" : "string"
+    }
+  }
+};
     defs["AsyncResponse"] = {
   "required" : [ "id" ],
   "type" : "object",
@@ -954,13 +966,16 @@ ul.nav-tabs {
   "enum" : [ "gas", "electricity", "water" ]
 };
     defs["Record"] = {
-  "required" : [ "customerId", "id", "value", "when" ],
+  "required" : [ "accountId", "customerId", "id", "value", "when" ],
   "type" : "object",
   "properties" : {
     "id" : {
       "type" : "string"
     },
     "customerId" : {
+      "type" : "string"
+    },
+    "accountId" : {
       "type" : "string"
     },
     "when" : {
@@ -1015,8 +1030,14 @@ ul.nav-tabs {
             <li class="nav-fixed nav-header active" data-group="_"><a href="#api-_">API Summary</a></li>
 
                   <li class="nav-header" data-group="Default"><a href="#api-Default">API Methods - Default</a></li>
+                    <li data-group="Default" data-name="createCustomer" class="">
+                      <a href="#api-Default-createCustomer">createCustomer</a>
+                    </li>
                     <li data-group="Default" data-name="createRecord" class="">
                       <a href="#api-Default-createRecord">createRecord</a>
+                    </li>
+                    <li data-group="Default" data-name="getCustomers" class="">
+                      <a href="#api-Default-getCustomers">getCustomers</a>
                     </li>
                     <li data-group="Default" data-name="getReadingTypes" class="">
                       <a href="#api-Default-getReadingTypes">getReadingTypes</a>
@@ -1050,6 +1071,380 @@ This is an early availabilty API, and is subject to change.
         <div id="sections">
                 <section id="api-Default">
                   <h1>Default</h1>
+                    <div id="api-Default-createCustomer">
+                      <article id="api-Default-createCustomer-0" data-group="User" data-name="createCustomer" data-version="0">
+                        <div class="pull-left">
+                          <h1>createCustomer</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Register a customer record</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/customers</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-createCustomer-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-createCustomer-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-createCustomer-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-createCustomer-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-createCustomer-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-createCustomer-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-createCustomer-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-createCustomer-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-createCustomer-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-createCustomer-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-createCustomer-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Default-createCustomer-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-createCustomer-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Basic [[basicHash]]" "http://parasolsuite.com/api/v1/customers"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-createCustomer-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure HTTP basic authorization: jwt
+        HttpBasicAuth jwt = (HttpBasicAuth) defaultClient.getAuthentication("jwt");
+        jwt.setUsername("YOUR USERNAME");
+        jwt.setPassword("YOUR PASSWORD");
+        // Configure HTTP bearer authorization: jwt
+        HttpBearerAuth jwt = (HttpBearerAuth) defaultClient.getAuthentication("jwt");
+        jwt.setBearerToken("BEARER TOKEN");
+
+        DefaultApi apiInstance = new DefaultApi();
+        Customer customer = ; // Customer | 
+        try {
+            apiInstance.createCustomer(customer);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#createCustomer");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-createCustomer-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        Customer customer = ; // Customer | 
+        try {
+            apiInstance.createCustomer(customer);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#createCustomer");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-createCustomer-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-createCustomer-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+// Configure HTTP basic authorization (authentication scheme: jwt)
+[apiConfig setUsername:@"YOUR_USERNAME"];
+[apiConfig setPassword:@"YOUR_PASSWORD"];
+
+Customer *customer = ; // 
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+[apiInstance createCustomerWith:customer
+              completionHandler: ^(NSError* error) {
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-createCustomer-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ParasolApi = require('parasol_api');
+var defaultClient = ParasolApi.ApiClient.instance;
+
+// Configure HTTP basic authorization: jwt
+var jwt = defaultClient.authentications['jwt'];
+jwt.username = 'YOUR USERNAME'
+jwt.password = 'YOUR PASSWORD'
+
+var api = new ParasolApi.DefaultApi()
+var customer = ; // {Customer} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.createCustomer(customer, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-createCustomer-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-createCustomer-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class createCustomerExample
+    {
+        public void main()
+        {
+            
+            // Configure HTTP basic authorization: jwt
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new DefaultApi();
+            var customer = new Customer(); // Customer | 
+
+            try
+            {
+                apiInstance.createCustomer(customer);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.createCustomer: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-createCustomer-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: jwt
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+
+$api_instance = new OpenAPITools\Client\Api\DefaultApi();
+$customer = ; // Customer | 
+
+try {
+    $api_instance->createCustomer($customer);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->createCustomer: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-createCustomer-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::DefaultApi;
+
+# Configure HTTP basic authorization: jwt
+$WWW::OPenAPIClient::Configuration::username = 'YOUR_USERNAME';
+$WWW::OPenAPIClient::Configuration::password = 'YOUR_PASSWORD';
+
+my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
+my $customer = WWW::OPenAPIClient::Object::Customer->new(); # Customer | 
+
+eval { 
+    $api_instance->createCustomer(customer => $customer);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->createCustomer: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-createCustomer-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: jwt
+openapi_client.configuration.username = 'YOUR_USERNAME'
+openapi_client.configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = openapi_client.DefaultApi()
+customer =  # Customer | 
+
+try: 
+    api_instance.create_customer(customer)
+except ApiException as e:
+    print("Exception when calling DefaultApi->createCustomer: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-createCustomer-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
+
+pub fn main() {
+    let customer = ; // Customer
+
+    let mut context = DefaultApi::Context::default();
+    let result = client.createCustomer(customer, &context).wait();
+    println!("{:?}", result);
+
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">customer <span style="color:red;">*</span></td>
+<td>
+<p class="marked">Details of the customer </p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "description" : "Details of the customer ",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Customer"
+      }
+    }
+  },
+  "required" : true
+};
+  var schema = findNode('schema', schemaWrapper).schema;
+  if (!schema) {
+      schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_createCustomer_customer');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_createCustomer_customer"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Default-createCustomer-title-400"></h3>
+                            <p id="examples-Default-createCustomer-description-400" class="marked"></p>
+                            <script>
+                              var responseDefault400_description = `One or more errors have occurred when attempting to process the provided data`;
+                              var responseDefault400_description_break = responseDefault400_description.indexOf('\n');
+                              if (responseDefault400_description_break == -1) {
+                                $("#examples-Default-createCustomer-title-400").text("Status: 400 - " + responseDefault400_description);
+                              } else {
+                                $("#examples-Default-createCustomer-title-400").text("Status: 400 - " + responseDefault400_description.substring(0, responseDefault400_description_break));
+                                $("#examples-Default-createCustomer-description-400").html(responseDefault400_description.substring(responseDefault400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-createCustomer-400" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-createCustomer-400-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-createCustomer-400-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-createCustomer-400-schema">
+                                  <div id="responses-Default-createCustomer-schema-400" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "One or more errors have occurred when attempting to process the provided data",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorResponse"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                            schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-createCustomer-400-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-createCustomer-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-createCustomer-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Default-createRecord">
                       <article id="api-Default-createRecord-0" data-group="User" data-name="createRecord" data-version="0">
                         <div class="pull-left">
@@ -1459,6 +1854,540 @@ $(document).ready(function() {
                                     </script>
                                   </div>
                                   <input id='responses-Default-createRecord-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Default-getCustomers">
+                      <article id="api-Default-getCustomers-0" data-group="User" data-name="getCustomers" data-version="0">
+                        <div class="pull-left">
+                          <h1>getCustomers</h1>
+                          <p></p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">Provide basic records </p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/customers</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Default-getCustomers-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Default-getCustomers-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Default-getCustomers-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Default-getCustomers-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Default-getCustomers-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Default-getCustomers-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Default-getCustomers-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Default-getCustomers-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Default-getCustomers-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Default-getCustomers-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Default-getCustomers-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Default-getCustomers-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Default-getCustomers-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET -H "Accept: application/json" -H "Authorization: Basic [[basicHash]]" "http://parasolsuite.com/api/v1/customers?customerCode=&format="</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Default-getCustomers-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.DefaultApi;
+
+import java.io.File;
+import java.util.*;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure HTTP basic authorization: jwt
+        HttpBasicAuth jwt = (HttpBasicAuth) defaultClient.getAuthentication("jwt");
+        jwt.setUsername("YOUR USERNAME");
+        jwt.setPassword("YOUR PASSWORD");
+        // Configure HTTP bearer authorization: jwt
+        HttpBearerAuth jwt = (HttpBearerAuth) defaultClient.getAuthentication("jwt");
+        jwt.setBearerToken("BEARER TOKEN");
+
+        DefaultApi apiInstance = new DefaultApi();
+        String customerCode = OUH; // String | The code for the customer for which the records should be returned
+        String format = short; // String | Format for the output. TBD, but may be used to control the scope of information returned.
+        try {
+            array[Customer] result = apiInstance.getCustomers(customerCode, format);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#getCustomers");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Default-getCustomers-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.DefaultApi;
+
+public class DefaultApiExample {
+
+    public static void main(String[] args) {
+        DefaultApi apiInstance = new DefaultApi();
+        String customerCode = OUH; // String | The code for the customer for which the records should be returned
+        String format = short; // String | Format for the output. TBD, but may be used to control the scope of information returned.
+        try {
+            array[Customer] result = apiInstance.getCustomers(customerCode, format);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling DefaultApi#getCustomers");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Default-getCustomers-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Default-getCustomers-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+// Configure HTTP basic authorization (authentication scheme: jwt)
+[apiConfig setUsername:@"YOUR_USERNAME"];
+[apiConfig setPassword:@"YOUR_PASSWORD"];
+
+String *customerCode = OUH; // The code for the customer for which the records should be returned (default to null)
+String *format = short; // Format for the output. TBD, but may be used to control the scope of information returned. (optional) (default to null)
+
+DefaultApi *apiInstance = [[DefaultApi alloc] init];
+
+[apiInstance getCustomersWith:customerCode
+    format:format
+              completionHandler: ^(array[Customer] output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getCustomers-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var ParasolApi = require('parasol_api');
+var defaultClient = ParasolApi.ApiClient.instance;
+
+// Configure HTTP basic authorization: jwt
+var jwt = defaultClient.authentications['jwt'];
+jwt.username = 'YOUR USERNAME'
+jwt.password = 'YOUR PASSWORD'
+
+var api = new ParasolApi.DefaultApi()
+var customerCode = OUH; // {String} The code for the customer for which the records should be returned
+var opts = {
+  'format': short // {String} Format for the output. TBD, but may be used to control the scope of information returned.
+};
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getCustomers(customerCode, opts, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Default-getCustomers-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Default-getCustomers-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class getCustomersExample
+    {
+        public void main()
+        {
+            
+            // Configure HTTP basic authorization: jwt
+            Configuration.Default.Username = "YOUR_USERNAME";
+            Configuration.Default.Password = "YOUR_PASSWORD";
+
+            var apiInstance = new DefaultApi();
+            var customerCode = OUH;  // String | The code for the customer for which the records should be returned (default to null)
+            var format = short;  // String | Format for the output. TBD, but may be used to control the scope of information returned. (optional)  (default to null)
+
+            try
+            {
+                array[Customer] result = apiInstance.getCustomers(customerCode, format);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling DefaultApi.getCustomers: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getCustomers-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: jwt
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setUsername('YOUR_USERNAME');
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setPassword('YOUR_PASSWORD');
+
+$api_instance = new OpenAPITools\Client\Api\DefaultApi();
+$customerCode = OUH; // String | The code for the customer for which the records should be returned
+$format = short; // String | Format for the output. TBD, but may be used to control the scope of information returned.
+
+try {
+    $result = $api_instance->getCustomers($customerCode, $format);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DefaultApi->getCustomers: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getCustomers-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::DefaultApi;
+
+# Configure HTTP basic authorization: jwt
+$WWW::OPenAPIClient::Configuration::username = 'YOUR_USERNAME';
+$WWW::OPenAPIClient::Configuration::password = 'YOUR_PASSWORD';
+
+my $api_instance = WWW::OPenAPIClient::DefaultApi->new();
+my $customerCode = OUH; # String | The code for the customer for which the records should be returned
+my $format = short; # String | Format for the output. TBD, but may be used to control the scope of information returned.
+
+eval { 
+    my $result = $api_instance->getCustomers(customerCode => $customerCode, format => $format);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling DefaultApi->getCustomers: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getCustomers-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Configure HTTP basic authorization: jwt
+openapi_client.configuration.username = 'YOUR_USERNAME'
+openapi_client.configuration.password = 'YOUR_PASSWORD'
+
+# create an instance of the API class
+api_instance = openapi_client.DefaultApi()
+customerCode = OUH # String | The code for the customer for which the records should be returned (default to null)
+format = short # String | Format for the output. TBD, but may be used to control the scope of information returned. (optional) (default to null)
+
+try: 
+    api_response = api_instance.get_customers(customerCode, format=format)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling DefaultApi->getCustomers: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Default-getCustomers-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate DefaultApi;
+
+pub fn main() {
+    let customerCode = OUH; // String
+    let format = short; // String
+
+    let mut context = DefaultApi::Context::default();
+    let result = client.getCustomers(customerCode, format, &context).wait();
+    println!("{:?}", result);
+
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+                            <div class="methodsubtabletitle">Query parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">customerCode*</td>
+<td>
+
+
+    <div id="d2e199_getCustomers_customerCode">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+The code for the customer for which the records should be returned
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                                <tr><td style="width:150px;">format</td>
+<td>
+
+
+    <div id="d2e199_getCustomers_format">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    String
+                </span>
+
+                    <div class="inner description marked">
+Format for the output. TBD, but may be used to control the scope of information returned.
+                    </div>
+            </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Default-getCustomers-title-200"></h3>
+                            <p id="examples-Default-getCustomers-description-200" class="marked"></p>
+                            <script>
+                              var responseDefault200_description = `The customer info`;
+                              var responseDefault200_description_break = responseDefault200_description.indexOf('\n');
+                              if (responseDefault200_description_break == -1) {
+                                $("#examples-Default-getCustomers-title-200").text("Status: 200 - " + responseDefault200_description);
+                              } else {
+                                $("#examples-Default-getCustomers-title-200").text("Status: 200 - " + responseDefault200_description.substring(0, responseDefault200_description_break));
+                                $("#examples-Default-getCustomers-description-200").html(responseDefault200_description.substring(responseDefault200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-getCustomers-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-getCustomers-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-getCustomers-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-getCustomers-200-schema">
+                                  <div id="responses-Default-getCustomers-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "The customer info",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/Customer"
+        }
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                            schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-getCustomers-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-getCustomers-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-getCustomers-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Default-getCustomers-title-400"></h3>
+                            <p id="examples-Default-getCustomers-description-400" class="marked"></p>
+                            <script>
+                              var responseDefault400_description = `One or more errors have occurred when attempting to process the provided data`;
+                              var responseDefault400_description_break = responseDefault400_description.indexOf('\n');
+                              if (responseDefault400_description_break == -1) {
+                                $("#examples-Default-getCustomers-title-400").text("Status: 400 - " + responseDefault400_description);
+                              } else {
+                                $("#examples-Default-getCustomers-title-400").text("Status: 400 - " + responseDefault400_description.substring(0, responseDefault400_description_break));
+                                $("#examples-Default-getCustomers-description-400").html(responseDefault400_description.substring(responseDefault400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-getCustomers-400" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-getCustomers-400-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-getCustomers-400-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-getCustomers-400-schema">
+                                  <div id="responses-Default-getCustomers-schema-400" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "One or more errors have occurred when attempting to process the provided data",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorResponse"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                            schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-getCustomers-400-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-getCustomers-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-getCustomers-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Default-getCustomers-title-403"></h3>
+                            <p id="examples-Default-getCustomers-description-403" class="marked"></p>
+                            <script>
+                              var responseDefault403_description = `Forbidden - you do not have the necessary permissions to undertake this action`;
+                              var responseDefault403_description_break = responseDefault403_description.indexOf('\n');
+                              if (responseDefault403_description_break == -1) {
+                                $("#examples-Default-getCustomers-title-403").text("Status: 403 - " + responseDefault403_description);
+                              } else {
+                                $("#examples-Default-getCustomers-title-403").text("Status: 403 - " + responseDefault403_description.substring(0, responseDefault403_description_break));
+                                $("#examples-Default-getCustomers-description-403").html(responseDefault403_description.substring(responseDefault403_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Default-getCustomers-403" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Default-getCustomers-403-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Default-getCustomers-403-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Default-getCustomers-403-schema">
+                                  <div id="responses-Default-getCustomers-schema-403" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Forbidden - you do not have the necessary permissions to undertake this action",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/ErrorResponse"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                            schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Default-getCustomers-403-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Default-getCustomers-schema-403');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Default-getCustomers-403-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
                         </article>

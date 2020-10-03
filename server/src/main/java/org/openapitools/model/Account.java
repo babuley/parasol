@@ -10,55 +10,57 @@ import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 /**
- * CustomerContact
+ * Account
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-03T10:33:08.802504+01:00[Europe/London]")
 
-public class CustomerContact   {
-  @JsonProperty("emailAddress")
-  private String emailAddress;
+public class Account   {
+  @JsonProperty("id")
+  private String id;
 
-  @JsonProperty("phone")
-  private String phone;
+  @JsonProperty("name")
+  private String name;
 
-  public CustomerContact emailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
+  public Account id(String id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get emailAddress
-   * @return emailAddress
+   * Get id
+   * @return id
   */
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
 
 
-  public String getEmailAddress() {
-    return emailAddress;
+  public String getId() {
+    return id;
   }
 
-  public void setEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
+  public void setId(String id) {
+    this.id = id;
   }
 
-  public CustomerContact phone(String phone) {
-    this.phone = phone;
+  public Account name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get phone
-   * @return phone
+   * Get name
+   * @return name
   */
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
 
 
-  public String getPhone() {
-    return phone;
+  public String getName() {
+    return name;
   }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -70,23 +72,23 @@ public class CustomerContact   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CustomerContact customerContact = (CustomerContact) o;
-    return Objects.equals(this.emailAddress, customerContact.emailAddress) &&
-        Objects.equals(this.phone, customerContact.phone);
+    Account account = (Account) o;
+    return Objects.equals(this.id, account.id) &&
+        Objects.equals(this.name, account.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(emailAddress, phone);
+    return Objects.hash(id, name);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CustomerContact {\n");
+    sb.append("class Account {\n");
     
-    sb.append("    emailAddress: ").append(toIndentedString(emailAddress)).append("\n");
-    sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("}");
     return sb.toString();
   }

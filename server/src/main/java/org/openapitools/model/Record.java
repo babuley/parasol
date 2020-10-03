@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 /**
  * Record
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-02T17:20:43.453855+01:00[Europe/London]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-03T10:33:08.802504+01:00[Europe/London]")
 
 public class Record   {
   @JsonProperty("id")
@@ -21,6 +21,9 @@ public class Record   {
 
   @JsonProperty("customerId")
   private String customerId;
+
+  @JsonProperty("accountId")
+  private String accountId;
 
   @JsonProperty("when")
   @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE)
@@ -72,6 +75,27 @@ public class Record   {
 
   public void setCustomerId(String customerId) {
     this.customerId = customerId;
+  }
+
+  public Record accountId(String accountId) {
+    this.accountId = accountId;
+    return this;
+  }
+
+  /**
+   * Get accountId
+   * @return accountId
+  */
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
+
+
+  public String getAccountId() {
+    return accountId;
+  }
+
+  public void setAccountId(String accountId) {
+    this.accountId = accountId;
   }
 
   public Record when(LocalDate when) {
@@ -149,6 +173,7 @@ public class Record   {
     Record record = (Record) o;
     return Objects.equals(this.id, record.id) &&
         Objects.equals(this.customerId, record.customerId) &&
+        Objects.equals(this.accountId, record.accountId) &&
         Objects.equals(this.when, record.when) &&
         Objects.equals(this.value, record.value) &&
         Objects.equals(this.readingType, record.readingType);
@@ -156,7 +181,7 @@ public class Record   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, customerId, when, value, readingType);
+    return Objects.hash(id, customerId, accountId, when, value, readingType);
   }
 
   @Override
@@ -166,6 +191,7 @@ public class Record   {
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    customerId: ").append(toIndentedString(customerId)).append("\n");
+    sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
     sb.append("    when: ").append(toIndentedString(when)).append("\n");
     sb.append("    value: ").append(toIndentedString(value)).append("\n");
     sb.append("    readingType: ").append(toIndentedString(readingType)).append("\n");

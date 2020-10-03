@@ -8,12 +8,12 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("${openapi.parasol.base-path:/api/v1}")
-public class ReadingTypesApiController implements ReadingTypesApi {
+public class CustomersApiController implements CustomersApi {
 
     private final NativeWebRequest request;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public ReadingTypesApiController(NativeWebRequest request) {
+    public CustomersApiController(NativeWebRequest request) {
         this.request = request;
     }
 
