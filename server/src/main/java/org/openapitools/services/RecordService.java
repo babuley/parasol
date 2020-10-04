@@ -31,6 +31,7 @@ public class RecordService implements IRecordService {
             rr.value(r.getValue());
             rr.readingType(r.getReadingType());
             rr.when(r.getWhen());
+
             return rr;
 
         }).collect(Collectors.toList());

@@ -76,7 +76,7 @@ public interface RecordsApi {
     @RequestMapping(value = "/records",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<List<Record>> getRecords(@NotNull @ApiParam(value = "The code for the customer for which the records should be returned", required = true) @Valid @RequestParam(value = "customerCode", required = true) String customerCode, @ApiParam(value = "Format for the output. TBD, but may be used to control the scope of information returned.") @Valid @RequestParam(value = "format", required = false) String format) {
+    default ResponseEntity<List<Record>> getRecords(@NotNull @ApiParam(value = "The code for the customer for which the records should be returned", required = true) @Valid @RequestParam(value = "customerCode", required = false) String customerCode, @ApiParam(value = "Format for the output. TBD, but may be used to control the scope of information returned.") @Valid @RequestParam(value = "format", required = false) String format) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {

@@ -59,7 +59,7 @@ public class RecordsApiController implements RecordsApi {
     @RequestMapping(value = "/records",
             produces = { "application/json" },
             method = RequestMethod.GET)
-    public ResponseEntity<List<Record>> getRecords(@RequestParam(value = "customerCode", required = true) String customerCode, @ApiParam(value = "Format for the output. TBD, but may be used to control the scope of information returned.") @Valid @RequestParam(value = "format", required = false) String format) {
+    public ResponseEntity<List<Record>> getRecords(@RequestParam(value = "customerCode", required = false) String customerCode, @ApiParam(value = "Format for the output. TBD, but may be used to control the scope of information returned.") @Valid @RequestParam(value = "format", required = false) String format) {
 
 
         getRequest().ifPresent(request -> {

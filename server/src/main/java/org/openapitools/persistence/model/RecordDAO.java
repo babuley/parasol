@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity(name = "Record")
 public class RecordDAO{
@@ -16,7 +17,7 @@ public class RecordDAO{
 
     private String accountId;
 
-    private LocalDate when;
+    private LocalDateTime when;
 
     private String value;
 
@@ -49,11 +50,11 @@ public class RecordDAO{
         this.accountId = accountId;
     }
 
-    public LocalDate getWhen() {
+    public LocalDateTime getWhen() {
         return when;
     }
 
-    public void setWhen(LocalDate when) {
+    public void setWhen(LocalDateTime when) {
         this.when = when;
     }
 

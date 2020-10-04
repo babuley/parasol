@@ -2,8 +2,10 @@ import { NumberValueAccessor } from '@angular/forms';
 
 export class Record {
     id: number;
-    date: Date;
-    type: string;
+    customerId:string;
+    accountId:string;
+    when: Date;
+    readingType: string;
     value: number;
    // recordedBy: string;
 }

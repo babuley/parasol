@@ -1,8 +1,11 @@
 package org.openapitools.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -23,8 +26,8 @@ public class Record {
   private String accountId;
 
   @JsonProperty("when")
-  @org.springframework.format.annotation.DateTimeFormat(iso = org.springframework.format.annotation.DateTimeFormat.ISO.DATE)
-  private LocalDate when;
+  @org.springframework.format.annotation.DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private LocalDateTime when;
 
   @JsonProperty("value")
   private String value;
@@ -95,7 +98,7 @@ public class Record {
     this.accountId = accountId;
   }
 
-  public Record when(LocalDate when) {
+  public Record when(LocalDateTime when) {
     this.when = when;
     return this;
   }
@@ -105,15 +108,12 @@ public class Record {
    * @return when
   */
   @ApiModelProperty(required = true, value = "")
-  @NotNull
 
-  @Valid
-
-  public LocalDate getWhen() {
+  public LocalDateTime getWhen() {
     return when;
   }
 
-  public void setWhen(LocalDate when) {
+  public void setWhen(LocalDateTime when) {
     this.when = when;
   }
 

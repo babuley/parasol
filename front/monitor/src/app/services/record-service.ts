@@ -16,10 +16,10 @@ export class RecordService {
   }
 
   public getRecords(): Observable<Record[]> {
-    return this.http.get<Record[]>('/api/records').pipe(
+    return this.http.get<Record[]>('/api/v1/records').pipe(
       map(records => {
         return records.map(r => {
-          r.date = new Date(r.date);
+          r.when = new Date(r.when);
           return r;
         })
       }),
@@ -30,9 +30,9 @@ export class RecordService {
   }
 
   private sortRecords(a: Record, b: Record) {
-    if (a.date > b.date) {
+    if (a.when > b.when) {
       return 1;
-    } else if (a.date.getTime() == b.date.getTime()) {
+    } else if (a.when.getTime() == b.when.getTime()) {
       return 0;
     } else {
       return -1
@@ -41,7 +41,7 @@ export class RecordService {
 
 
   addRecord(record: Record) {
-    return this.http.post('/api/records', record);  
+    return this.http.post('/api/v1/records', record);  
   }
 
 }

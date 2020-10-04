@@ -1,7 +1,11 @@
 package org.openapitools;
 
 import com.fasterxml.jackson.databind.Module;
+import org.apache.tomcat.jni.Local;
 import org.openapitools.jackson.nullable.JsonNullableModule;
+import org.openapitools.persistence.model.RecordDAO;
+import org.openapitools.persistence.services.RecordRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
@@ -11,19 +15,30 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Random;
+
 @SpringBootApplication
 @ComponentScan(basePackages = {"org.openapitools", "org.openapitools.api" , "org.openapitools.configuration"})
 public class ParasolWebApplication implements CommandLineRunner {
+
+    @Autowired
+    RecordRepository recordRepo;
 
     @Override
     public void run(String... arg0) throws Exception {
         if (arg0.length > 0 && arg0[0].equals("exitcode")) {
             throw new ExitException();
         }
+        loadMockData();
     }
 
     public static void main(String[] args) throws Exception {
         new SpringApplication(ParasolWebApplication.class).run(args);
+
     }
 
     static class ExitException extends RuntimeException implements ExitCodeGenerator {
@@ -33,6 +48,22 @@ public class ParasolWebApplication implements CommandLineRunner {
         public int getExitCode() {
             return 10;
         }
+
+    }
+
+    private void loadMockData(){
+        String[] a = new String[]{"Smith","Jones", "Williams","Morris","Button", "Rook"};
+
+        Random rr = new Random(1000);
+        Arrays.stream(a).forEach( n -> {
+            RecordDAO r = new RecordDAO();
+            r.setAccountId(String.valueOf(Math.abs(rr.nextInt())));
+            r.setName(n);
+            r.setReadingType("gas");
+            r.setValue(String.valueOf(Math.abs(rr.nextInt())));
+            r.setWhen(LocalDateTime.now());
+            recordRepo.save(r);
+        });
 
     }
 
