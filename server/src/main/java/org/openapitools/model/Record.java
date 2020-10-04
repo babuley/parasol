@@ -2,11 +2,8 @@ package org.openapitools.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDate;
-import org.openapitools.jackson.nullable.JsonNullable;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
@@ -15,7 +12,7 @@ import javax.validation.constraints.*;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-03T10:33:08.802504+01:00[Europe/London]")
 
-public class Record   {
+public class Record {
   @JsonProperty("id")
   private String id;
 
@@ -170,13 +167,13 @@ public class Record   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Record record = (Record) o;
-    return Objects.equals(this.id, record.id) &&
-        Objects.equals(this.customerId, record.customerId) &&
-        Objects.equals(this.accountId, record.accountId) &&
-        Objects.equals(this.when, record.when) &&
-        Objects.equals(this.value, record.value) &&
-        Objects.equals(this.readingType, record.readingType);
+    Record recordDAO = (Record) o;
+    return Objects.equals(this.id, recordDAO.id) &&
+        Objects.equals(this.customerId, recordDAO.customerId) &&
+        Objects.equals(this.accountId, recordDAO.accountId) &&
+        Objects.equals(this.when, recordDAO.when) &&
+        Objects.equals(this.value, recordDAO.value) &&
+        Objects.equals(this.readingType, recordDAO.readingType);
   }
 
   @Override

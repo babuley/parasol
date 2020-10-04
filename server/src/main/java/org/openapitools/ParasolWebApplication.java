@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"org.openapitools", "org.openapitools.api" , "org.openapitools.configuration"})
-public class OpenAPI2SpringBoot implements CommandLineRunner {
+public class ParasolWebApplication implements CommandLineRunner {
 
     @Override
     public void run(String... arg0) throws Exception {
@@ -23,7 +23,7 @@ public class OpenAPI2SpringBoot implements CommandLineRunner {
     }
 
     public static void main(String[] args) throws Exception {
-        new SpringApplication(OpenAPI2SpringBoot.class).run(args);
+        new SpringApplication(ParasolWebApplication.class).run(args);
     }
 
     static class ExitException extends RuntimeException implements ExitCodeGenerator {
