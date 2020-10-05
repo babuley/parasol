@@ -13,21 +13,29 @@ import { NewRecord } from './components/new-record/new-record.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { RecordInfoComponent } from './components/record-info/record-info.component';
- 
+import { RecordTableComponent } from './components/home/record-table/record-table.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NgxChartsModule }from '@swimlane/ngx-charts'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NewRecord,
     LoginComponent,
-    RecordInfoComponent
+    RecordInfoComponent,
+    RecordTableComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,        
     AppRoutingModule,
     CommonModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

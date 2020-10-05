@@ -8,6 +8,8 @@ import { IdentityService } from 'src/app/services/identity.service';
 })
 export class LoginComponent implements OnInit {
 
+  //todo: link to auth0
+
   constructor(public identitySvc:IdentityService) { }
 
   ngOnInit(): void {

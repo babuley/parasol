@@ -5,6 +5,7 @@ import org.apache.tomcat.jni.Local;
 import org.openapitools.jackson.nullable.JsonNullableModule;
 import org.openapitools.persistence.model.RecordDAO;
 import org.openapitools.persistence.services.RecordRepository;
+import org.openapitools.services.IMockDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
@@ -28,6 +29,11 @@ public class ParasolWebApplication implements CommandLineRunner {
     @Autowired
     RecordRepository recordRepo;
 
+    @Autowired
+    IMockDataService mockDataService;
+
+    private final String[] resources = new String[] {"gas", "electricity", "water"};
+
     @Override
     public void run(String... arg0) throws Exception {
         if (arg0.length > 0 && arg0[0].equals("exitcode")) {
@@ -41,6 +47,14 @@ public class ParasolWebApplication implements CommandLineRunner {
 
     }
 
+    private void loadMockData() {
+        Arrays.stream(resources).forEach( resource -> {
+            mockDataService.generateRecordsOf(resource).forEach(recordDAO -> {
+                recordRepo.save(recordDAO);
+            });
+        });
+    }
+
     static class ExitException extends RuntimeException implements ExitCodeGenerator {
         private static final long serialVersionUID = 1L;
 
@@ -51,21 +65,6 @@ public class ParasolWebApplication implements CommandLineRunner {
 
     }
 
-    private void loadMockData(){
-        String[] a = new String[]{"Smith","Jones", "Williams","Morris","Button", "Rook"};
-
-        Random rr = new Random(1000);
-        Arrays.stream(a).forEach( n -> {
-            RecordDAO r = new RecordDAO();
-            r.setAccountId(String.valueOf(Math.abs(rr.nextInt())));
-            r.setName(n);
-            r.setReadingType("gas");
-            r.setValue(String.valueOf(Math.abs(rr.nextInt())));
-            r.setWhen(LocalDateTime.now());
-            recordRepo.save(r);
-        });
-
-    }
 
     @Bean
     public WebMvcConfigurer webConfigurer() {

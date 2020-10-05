@@ -5,7 +5,16 @@ export class Record {
     customerId:string;
     accountId:string;
     when: Date;
-    readingType: string;
+    readingType: ReadingType;
     value: number;
    // recordedBy: string;
 }
+
+
+export class AggregateItem {
+    constructor( public name:string, public value:number) {
+
+    }
+}
+
+export enum ReadingType {gas = "gas", electricity = "electricity", water = "water"};

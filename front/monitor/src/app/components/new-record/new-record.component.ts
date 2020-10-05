@@ -3,7 +3,7 @@ import { Record } from 'src/app/model/record';
 
 
 @Component({
-  selector: 'app-new-record',
+  selector: 'new-record',
   templateUrl: './new-record.component.html',
   styleUrls: ['./new-record.component.scss']
 })
