@@ -1,4 +1,7 @@
+
 # parasol
+![Java CI with Maven](https://github.com/babuley/parasol/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
+
 Demo/Proof of concept tool for recording, monitoring energy meter readings.
 Backend with Spring and hibernate/H2, swagger api and Angular frontend.
 
