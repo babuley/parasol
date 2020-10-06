@@ -74,6 +74,57 @@ public class RecordDAO{
         this.readingType = readingType;
     }
 
+    private RecordDAO(Builder builder) {
+        this.accountId = builder.accountId;
+        this.name = builder.name;
+        this.readingType = builder.readingType;
+        this.when = builder.when;
+        this.value = builder.value;
+    }
 
+    public static class Builder {
+        private String name;
+
+        private String accountId;
+
+        private LocalDateTime when;
+
+        private String value;
+
+        private String readingType;
+
+        public Builder() {
+
+        }
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder accountId(String accountId) {
+            this.accountId = accountId;
+            return this;
+        }
+
+        public Builder when(LocalDateTime when) {
+            this.when = when;
+            return this;
+        }
+
+        public Builder value(String value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder readingType(String readingType) {
+            this.readingType = readingType;
+            return this;
+        }
+
+        public RecordDAO build() {
+            return new RecordDAO(this);
+        }
+
+    }
 
 }

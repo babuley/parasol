@@ -1,32 +1,47 @@
 package org.openapitools.services;
 
 import org.openapitools.persistence.model.RecordDAO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import com.google.common.base.Splitter;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Service
 public class MockDataService implements IMockDataService {
 
-    private final String[] a = new String[]{"Smith","Jones", "Williams","Morris","Button", "Rook","Wilson"};
+    @Value("${com.parasol.mockdata.names:}")
+    String mockDataNames;
 
     @Override
     public List<RecordDAO> generateRecordsOf(String resource) {
             Random rr = new Random(1000);
 
-            return Arrays.stream(a).map(n -> {
-                RecordDAO r = new RecordDAO();
-                r.setAccountId(String.valueOf(Math.abs(rr.nextInt(100 * n.length()))));
-                r.setName(n);
-                r.setReadingType(resource);
-                r.setValue(String.valueOf(Math.abs(rr.nextInt(100* resource.length()))));
-                r.setWhen(LocalDateTime.now());
-                return r;
+            return getMockNames().stream().map(n -> {
+                LocalDateTime when = LocalDateTime.of(2020,rr.nextInt(10),rr.nextInt(29)  +1, rr.nextInt(23), rr.nextInt(59));
+                return new RecordDAO.Builder()
+                        .accountId(String.valueOf(Math.abs(rr.nextInt(100 * n.length()))))
+                        .name(n)
+                        .readingType(resource)
+                        .value(String.valueOf(Math.abs(rr.nextInt(100* resource.length()))))
+                        .when(when)
+                .build();
             }).collect(Collectors.toList());
-        }
     }
+
+    private Collection<String> getMockNames(){
+        checkNotNull(mockDataNames);
+        Iterable<String> chunks = Splitter.on(",").omitEmptyStrings().split(mockDataNames);
+        return StreamSupport.stream(chunks.spliterator(), false)
+                .collect(Collectors.toList());
+    }
+
+}
 
