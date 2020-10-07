@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
 
   filterByResource(records:Record[], resource:ReadingType) {
     return records.filter(r => {      
-      console.log(r.readingType, resource, r.readingType === resource);
         return r.readingType === resource;
     })
   }

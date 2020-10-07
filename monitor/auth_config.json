@@ -1,0 +1,7 @@
+{
+    "domain": "solisko.eu.auth0.com",
+    "clientId": "3FWcIs1G7AYsS49gSQOgzZptpFzI7MGG",
+    "audience": "http://parasol.solisko.com",
+    "apiUri": "http://localhost:8888",
+    "appUri": "http://localhost:4200"
+  }

@@ -11,8 +11,7 @@ export class AppComponent {
   title = 'monitor';
 
 
-  constructor(public recordsSvc: RecordService, 
-    public identitySvc:IdentityService ) {
+  constructor(public recordsSvc: RecordService    ) {
 
   }
 

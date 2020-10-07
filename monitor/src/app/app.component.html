@@ -1,30 +1,16 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-  <div class="nav">
-    <ul class="navbar-nav mr-auto">
-      <li class="navbar-brand">
-        <i class="fa fa-balance-scale"></i>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/home']" class="nav-link">Home</a>
-      </li>  
-      <li class="nav-item">
-        <a [routerLink]="['/dashboard']" class="nav-link">Dashboard</a>
-      </li>  
-      <li class="nav-item">
-        <a [routerLink]="['/record']" class="nav-link">Record</a>
-      </li>            
-      <li *ngIf="!identitySvc.loggedIn" class="nav-item">
-        <a [routerLink]="['/login']" class="nav-link">Login</a>
-      </li>
-      <li *ngIf="identitySvc.loggedIn" class="nav-item">
-        <a [routerLink]="['/login']" class="nav-link">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<main>
+<!-- <main>
   <router-outlet></router-outlet>
-</main>
+</main> -->
+
+<div class="d-flex flex-column h-100">
+  <navbar></navbar>
+
+  <div class="container flex-grow-1 flex-shrink-1">
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footer></app-footer> 
+</div>
 
 
