@@ -6,6 +6,10 @@ import org.openapitools.persistence.services.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Collection;
 import java.util.List;
@@ -18,6 +22,7 @@ public class RecordService implements IRecordService {
     RecordRepository recordRepo;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
     public List<Record> getRecords() {
         return toRecord(recordRepo.findAll());
     }
