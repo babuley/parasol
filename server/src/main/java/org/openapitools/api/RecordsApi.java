@@ -50,7 +50,7 @@ public interface RecordsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Void> createRecord(@ApiParam(value = "The ID of the customer",required=true) @PathVariable("customerId") String customerId,@ApiParam(value = "Details of the record for the customer (text, when, schedule, severity, etc)" ,required=true )  @Valid @RequestBody Record recordDAO) {
+    default ResponseEntity<Void> createRecord(@ApiParam(value = "Details of the record for the customer (text, when, schedule, severity, etc)" ,required=true )  @Valid @RequestBody Record recordDAO) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

@@ -10,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.validation.Valid;
@@ -78,5 +76,22 @@ public class RecordsApiController implements RecordsApi {
 
         return new ResponseEntity<List<Record>>(records, responseHeaders, HttpStatus.OK);
 
+    }
+
+    @ApiOperation(value = "", nickname = "createRecord", notes = "Register a reading record for a given customer", authorizations = {
+            @Authorization(value = "jwt")
+    }, tags={  })
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "One or more errors have occurred when attempting to process the provided data", response = ErrorResponse.class) })
+    @RequestMapping(value = "/records",
+            produces = { "application/json" },
+            consumes = { "application/json" },
+            method = RequestMethod.POST)
+    public ResponseEntity<Void> createRecord(@ApiParam(value = "Details of the record for the customer (text, when, schedule, severity, etc)" ,required=true )  @Valid @RequestBody Record record) {
+
+
+
+        this.recordService.addRecord(record);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

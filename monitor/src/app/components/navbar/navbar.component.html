@@ -33,7 +33,7 @@
           <li class="nav-item" *ngIf="auth.isAuthenticated$ | async">
             <a [routerLink]="['/record']" class="nav-link">Record</a>
           </li>             
-          <li *ngIf="!identitySvc.loggedIn" class="nav-item">
+          <li *ngIf="auth.isAuthenticated$ | async" class="nav-item">
             <a [routerLink]="['/profile']" class="nav-link">Profile</a>
           </li>          
         </ul>

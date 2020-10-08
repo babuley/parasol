@@ -20,7 +20,7 @@ export class RecordInfoComponent implements OnInit {
   ngOnInit(): void {
     let id = +this.currentRoute.snapshot.params.id;
     this.recordSvc.getRecords().subscribe( records => {
-      this.record = records.find(r => r.id === id);
+      this.record = records.find(r => Number(r.id) === id);
     });
 
   }

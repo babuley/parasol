@@ -27,6 +27,19 @@ public class RecordService implements IRecordService {
         return toRecord(recordRepo.findAll());
     }
 
+    @Override
+    public void addRecord(Record record) {
+
+        //TODO: sort out the name passing
+        RecordDAO r = new RecordDAO.Builder().accountId(record.getAccountId())
+                .readingType(record.getReadingType())
+                .when(record.getWhen())
+                .name("Fake name")
+                .value(record.getValue())
+                .build();
+        this.recordRepo.save(r);
+    }
+
     private List<Record> toRecord(Collection<RecordDAO> records) {
         return records.stream().map( r-> {
             Record rr = new Record();
@@ -41,5 +54,14 @@ public class RecordService implements IRecordService {
 
         }).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public Record getRecord(long id) {
+        RecordDAO r = this.recordRepo.getOne(id);
+        //do the converstion to record
+
+        //TODO: fixme
+        return null;
     }
 }

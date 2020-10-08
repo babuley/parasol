@@ -9,4 +9,8 @@ public interface IRecordService {
 
     List<Record> getRecords();
 
+    void addRecord(Record record);
+
+    Record getRecord(long id);
+
 }
