@@ -5,8 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 
 @Entity(name = "Record")
@@ -20,7 +19,7 @@ public class RecordDAO{
 
     private String accountId;
 
-    private LocalDateTime when;
+    private Timestamp whenRecorded;
 
     private String value;
 
@@ -53,12 +52,12 @@ public class RecordDAO{
         this.accountId = accountId;
     }
 
-    public LocalDateTime getWhen() {
-        return when;
+    public Timestamp getWhenRecorded() {
+        return whenRecorded;
     }
 
-    public void setWhen(LocalDateTime when) {
-        this.when = when;
+    public void setWhenRecorded(Timestamp whenRecorded) {
+        this.whenRecorded = whenRecorded;
     }
 
     public String getValue() {
@@ -78,19 +77,22 @@ public class RecordDAO{
     }
 
     private RecordDAO(Builder builder) {
+        this.id = builder.id;
         this.accountId = builder.accountId;
         this.name = builder.name;
         this.readingType = builder.readingType;
-        this.when = builder.when;
+        this.whenRecorded = builder.when;
         this.value = builder.value;
     }
 
     public static class Builder {
+
+        private long id;
         private String name;
 
         private String accountId;
 
-        private LocalDateTime when;
+        private Timestamp when;
 
         private String value;
 
@@ -99,6 +101,11 @@ public class RecordDAO{
         public Builder() {
 
         }
+        public Builder id(long id) {
+            this.id = id;
+            return this;
+        }
+
         public Builder name(String name) {
             this.name = name;
             return this;
@@ -109,7 +116,7 @@ public class RecordDAO{
             return this;
         }
 
-        public Builder when(LocalDateTime when) {
+        public Builder when(Timestamp when) {
             this.when = when;
             return this;
         }
