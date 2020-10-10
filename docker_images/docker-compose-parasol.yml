@@ -2,9 +2,30 @@ version: '3'
 
 services:
 
+  parasoldb:
+    image: mysql:5.7
+    volumes:
+    - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Gr33nAnaconda
+      MYSQL_DATABASE: parasoldb
+      MYSQL_USER: parasol
+      MYSQL_PASSWORD: BlackCoff33
+    ports:
+      - 3306:3306
+
   parasol:
     build:
       context: ../server
     ports:
       - 8888:8888
-    restart: unless-stopped        
+    restart: unless-stopped
+    environment: 
+      #dev or H2 db and prod for MySQL
+      SPRING_PROFILES_ACTIVE: prod,database/mysql      
+    depends_on:
+      - parasoldb  
+
+volumes:
+  db_data: {}

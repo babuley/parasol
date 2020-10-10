@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +35,8 @@ public class RecordService implements IRecordService {
         //TODO: sort out the name passing
         RecordDAO r = new RecordDAO.Builder().accountId(record.getAccountId())
                 .readingType(record.getReadingType())
-                .when(record.getWhen())
+                //TODO: get rid of java.sql dependency from here: make it in the dao builder
+                .when(Timestamp.valueOf(record.getWhen()))
                 .name("Fake name")
                 .value(record.getValue())
                 .build();
@@ -48,7 +51,7 @@ public class RecordService implements IRecordService {
             rr.customerId("-1");
             rr.value(r.getValue());
             rr.readingType(r.getReadingType());
-            rr.when(r.getWhen());
+            rr.when(r.getWhenRecorded().toLocalDateTime());
 
             return rr;
 
