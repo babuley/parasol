@@ -35,8 +35,7 @@ public class RecordService implements IRecordService {
         //TODO: sort out the name passing
         RecordDAO r = new RecordDAO.Builder().accountId(record.getAccountId())
                 .readingType(record.getReadingType())
-                //TODO: get rid of java.sql dependency from here: make it in the dao builder
-                .when(Timestamp.valueOf(record.getWhen()))
+                .when(record.getWhen())
                 .name("Fake name")
                 .value(record.getValue())
                 .build();

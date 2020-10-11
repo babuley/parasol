@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @Entity(name = "Record")
@@ -116,8 +117,11 @@ public class RecordDAO{
             return this;
         }
 
-        public Builder when(Timestamp when) {
-            this.when = when;
+        public Builder when(LocalDateTime when) {
+            if (when == null) {
+                when = LocalDateTime.now();
+            }
+            this.when = Timestamp.valueOf(when);
             return this;
         }
 
