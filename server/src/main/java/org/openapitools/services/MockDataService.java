@@ -4,7 +4,6 @@ import org.openapitools.persistence.model.RecordDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -27,14 +26,13 @@ public class MockDataService implements IMockDataService {
 
             return getMockNames().stream().map(n -> {
                 LocalDateTime when = LocalDateTime.of(2020,rr.nextInt(10),rr.nextInt(29)  +1, rr.nextInt(23), rr.nextInt(59));
-                Timestamp timestamp = Timestamp.valueOf(when);
                 return new RecordDAO.Builder()
                         .id(rr.nextInt(10000))
                         .accountId(String.valueOf(Math.abs(rr.nextInt(100 * n.length()))))
                         .name(n)
                         .readingType(resource)
                         .value(String.valueOf(Math.abs(rr.nextInt(100* resource.length()))))
-                        .when(timestamp)
+                        .when(when)
                 .build();
             }).collect(Collectors.toList());
     }
