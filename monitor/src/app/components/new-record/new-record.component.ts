@@ -21,10 +21,9 @@ export class NewRecord implements OnInit {
 
   addRecord() {
     let newRecord = Object.assign({}, this.model, {
-      date: new Date(this.model.date)      
+      when: new Date(this.model.date),
+      readingType: "gas"
     });
-    console.log(newRecord);
-    console.log(this.model.date);
     this.record.emit(newRecord);
   }
 
