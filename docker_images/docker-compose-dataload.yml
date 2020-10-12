@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+  dataloader:
+    build:
+      context: ./dataloader
+      dockerfile: Dockerfile
+    command: dataloader.py
+    volumes:
+    - ./dataloader:/script/
+
