@@ -17,8 +17,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 @Service
 public class RecordService implements IRecordService {
+
 
     @Autowired
     RecordRepository recordRepo;
@@ -31,6 +34,7 @@ public class RecordService implements IRecordService {
 
     @Override
     public void addRecord(Record record) {
+        checkArgument(record != null);
 
         //TODO: sort out the name passing
         RecordDAO r = new RecordDAO.Builder().accountId(record.getAccountId())

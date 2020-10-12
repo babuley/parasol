@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+  parasoldb:
+    image: mysql:5.7
+    volumes:
+    - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Gr33nAnaconda
+      MYSQL_DATABASE: parasoldb2
+      MYSQL_USER: parasol
+      MYSQL_PASSWORD: BlackCoff33
+    ports:
+    - 3306:3306
+
+
+volumes:
+  db_data: {}

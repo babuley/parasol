@@ -17,6 +17,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.List;
 
@@ -25,6 +28,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.http.converter.json.Jackson2ObjectMapperBuilder.json;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -65,18 +69,27 @@ public class ParasolIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content()
                         .contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
+
+        mock.perform(post("/api/v1/records")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("")
+        ).andExpect(status().isBadRequest());
     }
 
     @Test
     public void testDataFetch() throws Exception {
+        mock.perform(get("/api/v1/records"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
 
         mock.perform(get("/api/v1/records")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content()
-                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON)
+                        .contentTypeCompatibleWith(MediaType.APPLICATION_JSON));
 
-                );
+        mock.perform(get("/api/v2/records"))
+                .andDo(print()).andExpect(status().isNotFound());
     }
 
 }

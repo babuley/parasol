@@ -4,6 +4,8 @@ import io.swagger.annotations.*;
 import org.openapitools.model.ErrorResponse;
 import org.openapitools.model.Record;
 import org.openapitools.services.IRecordService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,11 +18,15 @@ import org.springframework.web.context.request.NativeWebRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+
+
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2020-10-03T10:33:08.802504+01:00[Europe/London]")
 
 @Controller
 @RequestMapping("${openapi.parasol.base-path:/api/v1}")
 public class RecordsApiController implements RecordsApi {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RecordsApiController.class);
 
     private final NativeWebRequest request;
 
@@ -88,10 +94,12 @@ public class RecordsApiController implements RecordsApi {
             consumes = { "application/json" },
             method = RequestMethod.POST)
     public ResponseEntity<Void> createRecord(@ApiParam(value = "Details of the record for the customer (text, when, schedule, severity, etc)" ,required=true )  @Valid @RequestBody Record record) {
-
-
-
-        this.recordService.addRecord(record);
+        try {
+            this.recordService.addRecord(record);
+        } catch (IllegalArgumentException e) {
+            LOG.error("Error on saving a record", e);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
