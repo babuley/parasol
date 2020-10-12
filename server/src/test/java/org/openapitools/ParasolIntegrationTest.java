@@ -1,4 +1,4 @@
-package com.parasol;
+package org.openapitools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -59,7 +59,6 @@ public class ParasolIntegrationTest {
                 .content(objectMapper.writeValueAsString(r)
                 )
         ).andExpect(status().isOk());
-
 
         mock.perform(get("/api/v1/records")
                 .contentType(MediaType.APPLICATION_JSON))
