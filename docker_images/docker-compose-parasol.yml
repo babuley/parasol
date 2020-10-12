@@ -27,5 +27,17 @@ services:
     depends_on:
       - parasoldb  
 
+  dataloader:
+    build:
+      context: ./dataloader
+      dockerfile: Dockerfile
+    command: dataloader.py
+    volumes:
+    - ./dataloader:/script/
+    depends_on:
+      - parasol
+    restart: unless-stopped            
+    
+
 volumes:
   db_data: {}
