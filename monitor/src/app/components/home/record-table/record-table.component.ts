@@ -14,6 +14,9 @@ export class RecordTableComponent implements OnInit {
   @Input()
   records:Record[];
 
+  page = 1;
+  pageSize = 10;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -8,9 +8,8 @@
         <th *ngIf="!showDetails" scope="col">Details</th>
       </tr>
     </thead>
-    <tbody>      
-        <tr *ngFor="let record of records; let idx = index">
-          <!-- <td>{{idx}}</td> -->
+    <tbody>            
+      <tr *ngFor="let record of records | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
           <td >{{record.id}}</td>
           <td>{{record.when | date:'dd/MM/yyyy @ HH:mm'}}</td>
           <td>{{record.readingType}}</td>
@@ -22,4 +21,8 @@
         </td>          
        </tr>          
     </tbody>
+    <ngb-pagination
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [collectionSize]="records?.length"></ngb-pagination>
   </table>

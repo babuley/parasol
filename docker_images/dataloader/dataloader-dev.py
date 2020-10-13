@@ -17,7 +17,7 @@ def toRandomRecord(record):
     return record
 
 
-parasol_api_address="http://parasol:8888"
+parasol_api_address="http://localhost:8888"
 versionApi = "v1"
 readingTypes = ["gas", "water","electricity"]
 
@@ -34,7 +34,7 @@ record_string = """
 record = json.loads(record_string)
 
 #Wait for the env to init
-time.sleep(60)
+#time.sleep(60)
 
 for i in range(iterations_count):
     record = toRandomRecord(record)
