@@ -41,7 +41,7 @@ public class TestRecordRepository {
         });
         List<RecordDAO> records = this.recordRepository.findAll();
 
-        Assert.assertEquals(records.size(),25);
+        Assert.assertEquals(records.size(),1);
         Assert.assertTrue(records.stream().filter(recordDAO -> recordDAO.getName().equals(resources[0])).findFirst().isPresent());
     }
 
