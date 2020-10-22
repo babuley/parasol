@@ -1,0 +1,9 @@
+FROM cassandra:3.11
+COPY cqlshrc /root/.cqlshrc
+
+# EXPOSE 7000
+# EXPOSE 7001
+# EXPOSE 9169
+# EXPOSE 9404
+# EXPOSE 7199
+

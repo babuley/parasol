@@ -1,0 +1,1 @@
+create keyspace IF NOT EXISTS parasol with replication={'class':'SimpleStrategy','replication_factor':1};

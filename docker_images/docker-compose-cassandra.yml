@@ -1,0 +1,17 @@
+version: '3'
+services:
+  n1:
+    build:
+      context: ./cassandra
+      dockerfile: Dockerfile
+    image: cassandra-with-cqlshrc
+    networks:
+      - cluster
+    environment:
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+      - CASSANDRA_RACK=RAC1      
+    ports:
+      - 9042:9042      
+networks:
+  cluster:
