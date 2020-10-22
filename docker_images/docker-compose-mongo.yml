@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: pa55word
+      MONGO_INITDB_DATABASE: parasoldb
+      DATABASE_USERNAME: parasol
+      DATABASE_PASSWORD: pa55word
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+    command: [--auth]
+
+volumes:
+  mongodb_data_container:
