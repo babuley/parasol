@@ -1,10 +1,7 @@
 package org.openapitools;
 
 import com.fasterxml.jackson.databind.Module;
-import org.apache.tomcat.jni.Local;
 import org.openapitools.jackson.nullable.JsonNullableModule;
-import org.openapitools.persistence.model.RecordDAO;
-import org.openapitools.persistence.services.RecordRepository;
 import org.openapitools.services.IMockDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,21 +10,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.Random;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.openapitools", "org.openapitools.api" , "org.openapitools.configuration"})
+@ComponentScan(basePackages = {"org.openapitools.event","org.openapitools.services","org.openapitools.report","org.openapitools.persistence", "org.openapitools.api" , "org.openapitools.configuration"})
 public class ParasolWebApplication implements CommandLineRunner {
 
-    @Autowired
-    RecordRepository recordRepo;
 
     @Autowired
     IMockDataService mockDataService;
@@ -52,7 +42,7 @@ public class ParasolWebApplication implements CommandLineRunner {
     private void loadMockData() {
         Arrays.stream(resources).forEach( resource -> {
             mockDataService.generateRecordsOf(resource).forEach(recordDAO -> {
-                recordRepo.save(recordDAO);
+                //recordRepo.save(recordDAO);
             });
         });
     }
