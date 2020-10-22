@@ -1,20 +1,19 @@
 package org.openapitools.services;
 
+import org.openapitools.event.IEventPublisher;
+import org.openapitools.event.RecordEvent;
 import org.openapitools.model.Record;
 import org.openapitools.persistence.model.RecordDAO;
 import org.openapitools.persistence.services.RecordRepository;
+import org.openapitools.report.model.RecordItem;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
+import javax.annotation.Resource;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -22,9 +21,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Service
 public class RecordService implements IRecordService {
 
-
     @Autowired
     RecordRepository recordRepo;
+
+    @Autowired
+    IEventPublisher eventPublisher;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
@@ -43,7 +44,29 @@ public class RecordService implements IRecordService {
                 .name("Fake name")
                 .value(record.getValue())
                 .build();
-        this.recordRepo.save(r);
+        this.recordRepo.saveAndFlush(r);
+
+        raiseEvents(toRecordItem(record, r));
+    }
+
+    private RecordItem toRecordItem(Record record, RecordDAO r) {
+        return new RecordItem.Builder()
+                .id(r.getId())
+                .name(r.getName())
+                .accountId(record.getAccountId())
+                .value(record.getValue())
+                .readingType(record.getReadingType())
+                .when(record.getWhen())
+                .build();
+    }
+
+    private void raiseEvents(RecordItem item){
+        if (item == null) return;
+
+        Map<String, Object> properties = new HashMap<>();
+        properties.put(RecordEvent.RECORD_KEY, item);
+        RecordEvent event = new RecordEvent(properties);
+        this.eventPublisher.raiseEvent(event);
     }
 
     private List<Record> toRecord(Collection<RecordDAO> records) {
@@ -64,7 +87,13 @@ public class RecordService implements IRecordService {
 
     @Override
     public Record getRecord(long id) {
-        RecordDAO r = this.recordRepo.getOne(id);
+        Optional<RecordDAO> present = this.recordRepo.findById(id);
+        if (!present.isPresent()){
+            return null;
+        }
+
+        RecordDAO recordDAO = present.get();
+
         //do the converstion to record
 
         //TODO: fixme

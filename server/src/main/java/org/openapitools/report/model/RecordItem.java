@@ -1,32 +1,33 @@
-package org.openapitools.persistence.model;
+package org.openapitools.report.model;
 
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-
-
-@Entity(name = "Record")
 @Table
-public class RecordDAO {
+public class RecordItem {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @PrimaryKey
     private Long id;
 
-
+    @Column("name")
     private String name;
 
+    @Column("accountId")
     private String accountId;
 
-    private Timestamp whenRecorded;
+    @Column("whenRecorded")
+    private LocalDateTime whenRecorded;
 
+    @Column("value")
     private String value;
 
+    @Column("readingType")
     private String readingType;
 
-    public RecordDAO() {
+    public RecordItem() {
     }
 
     public Long getId() {
@@ -53,11 +54,11 @@ public class RecordDAO {
         this.accountId = accountId;
     }
 
-    public Timestamp getWhenRecorded() {
+    public LocalDateTime getWhenRecorded() {
         return whenRecorded;
     }
 
-    public void setWhenRecorded(Timestamp whenRecorded) {
+    public void setWhenRecorded(LocalDateTime whenRecorded) {
         this.whenRecorded = whenRecorded;
     }
 
@@ -77,7 +78,7 @@ public class RecordDAO {
         this.readingType = readingType;
     }
 
-    private RecordDAO(Builder builder) {
+    private RecordItem(RecordItem.Builder builder) {
         this.id = builder.id;
         this.accountId = builder.accountId;
         this.name = builder.name;
@@ -93,7 +94,7 @@ public class RecordDAO {
 
         private String accountId;
 
-        private Timestamp when;
+        private LocalDateTime when;
 
         private String value;
 
@@ -118,10 +119,7 @@ public class RecordDAO {
         }
 
         public Builder when(LocalDateTime when) {
-            if (when == null) {
-                when = LocalDateTime.now();
-            }
-            this.when = Timestamp.valueOf(when);
+            this.when = when;
             return this;
         }
 
@@ -135,10 +133,9 @@ public class RecordDAO {
             return this;
         }
 
-        public RecordDAO build() {
-            return new RecordDAO(this);
+        public RecordItem build() {
+            return new RecordItem(this);
         }
 
     }
-
 }
