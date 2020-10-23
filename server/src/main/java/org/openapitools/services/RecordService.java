@@ -1,7 +1,10 @@
 package org.openapitools.services;
 
+import org.openapitools.event.IEventPublisher;
+import org.openapitools.event.RecordEvent;
 import org.openapitools.model.Record;
 import org.openapitools.persistence.model.RecordDAO;
+import org.openapitools.persistence.nosql.mongo.model.ReportItem;
 import org.openapitools.persistence.services.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -22,9 +27,11 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Service
 public class RecordService implements IRecordService {
 
-
     @Autowired
     RecordRepository recordRepo;
+
+    @Autowired
+    IEventPublisher eventPublisher;
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
@@ -43,7 +50,29 @@ public class RecordService implements IRecordService {
                 .name("Fake name")
                 .value(record.getValue())
                 .build();
-        this.recordRepo.save(r);
+        r = this.recordRepo.saveAndFlush(r);
+
+        raiseEvents(toReportItem(record, r));
+    }
+
+    private ReportItem toReportItem(Record record, RecordDAO r) {
+        return new ReportItem.Builder()
+                .id(r.getId())
+                .name(r.getName())
+                .accountId(record.getAccountId())
+                .value(record.getValue())
+                .readingType(record.getReadingType())
+                .when(record.getWhen())
+                .build();
+    }
+
+    private void raiseEvents(ReportItem item){
+        if (item == null) return;
+
+        Map<String, Object> properties = new HashMap<>();
+        properties.put(RecordEvent.RECORD_KEY, item);
+        RecordEvent event = new RecordEvent(properties);
+        this.eventPublisher.raiseEvent(event);
     }
 
     private List<Record> toRecord(Collection<RecordDAO> records) {

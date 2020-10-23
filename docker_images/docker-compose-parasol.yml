@@ -15,6 +15,20 @@ services:
     ports:
       - 3306:3306
 
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: pa55word
+      MONGO_INITDB_DATABASE: parasoldb
+      DATABASE_USERNAME: parasol
+      DATABASE_PASSWORD: pa55word
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+    command: [--auth]
+
   parasol:
     build:
       context: ../server
@@ -26,6 +40,7 @@ services:
       SPRING_PROFILES_ACTIVE: prod,database/mysql      
     depends_on:
       - parasoldb  
+      - mongo
 
   dataloader:
     build:
@@ -41,3 +56,4 @@ services:
 
 volumes:
   db_data: {}
+  mongodb_data_container:  
